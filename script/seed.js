@@ -1,18 +1,60 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Distros, BeerList} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({
+      email: 'cody@email.com',
+      password: '123',
+      isAdmin: true,
+      restaurant: 'Old Slo BBQ'
+    }),
+    User.create({
+      email: 'murphy@email.com',
+      password: '123',
+      isAdmin: true,
+      restaurant: 'Taco Truck'
+    })
+  ])
+
+  const distributors = await Promise.all([
+    Distros.create({name: 'PacBev'}),
+    Distros.create({name: 'CCD'}),
+    Distros.create({name: 'Thomas Weidner'})
+  ])
+
+  const beers = await Promise.all([
+    BeerList.create({
+      name: 'Elysian Space Dust',
+      distributionName: 'PacBev',
+      tap: 1
+    }),
+    BeerList.create({name: 'Stone IPA', distributionName: 'CCD', tap: 2}),
+    BeerList.create({
+      name: 'Kern River Pumpkin Ale',
+      distributionName: 'Thomas Weidner',
+      tap: 3
+    }),
+    BeerList.create({
+      name: 'Firestone Sucaba',
+      distributionName: 'PacBev',
+      tap: 4
+    }),
+    BeerList.create({
+      name: '32 North Considerate Gentleman',
+      distributionName: 'Thomas Weidner',
+      tap: 5
+    })
   ])
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${beers.length} beers`)
+  console.log(`seeded ${distributors.length} distributors`)
   console.log(`seeded successfully`)
 }
 
