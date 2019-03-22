@@ -32,23 +32,32 @@ async function seed() {
     BeerList.create({
       name: 'Elysian Space Dust',
       distributionName: 'PacBev',
-      tap: 1
+      tap: 1,
+      cleaned: Date.now() - 1000
     }),
-    BeerList.create({name: 'Stone IPA', distributionName: 'CCD', tap: 2}),
+    BeerList.create({
+      name: 'Stone IPA',
+      distributionName: 'CCD',
+      tap: 2,
+      cleaned: Date.now() - 100000
+    }),
     BeerList.create({
       name: 'Kern River Pumpkin Ale',
       distributionName: 'Thomas Weidner',
-      tap: 3
+      tap: 3,
+      cleaned: Date.now() - 50000
     }),
     BeerList.create({
       name: 'Firestone Sucaba',
       distributionName: 'PacBev',
-      tap: 4
+      tap: 4,
+      cleaned: Date.now() - 60000
     }),
     BeerList.create({
       name: '32 North Considerate Gentleman',
       distributionName: 'Thomas Weidner',
-      tap: 5
+      tap: 5,
+      cleaned: Date.now() - 70000
     })
   ])
 

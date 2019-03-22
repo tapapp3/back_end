@@ -10,6 +10,9 @@ const BeerList = db.define('beerlist', {
     type: Sequelize.INTEGER,
     unique: true,
     allowNull: false
+  },
+  cleaned: {
+    type: Sequelize.DATE
   }
 })
 
