@@ -6,5 +6,7 @@
 export {default as Navbar} from './navbar'
 export {default as BeerList} from './Distributions/BeerList'
 export {default as Distro} from './Distributions/Distro'
+export {default as OnTap} from './OnTap/OnTap'
 export {default as UserHome} from './user-home'
+// export {default as Listy} from './Distributions/Listy'
 export {Login, Signup} from './auth-form'

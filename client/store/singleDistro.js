@@ -10,7 +10,6 @@ export const getOneDistro = distro => ({
 export const getSingleDistro = name => async dispatch => {
   try {
     const {data} = await axios.get(`/api/distros/${name}`)
-    console.log(data)
     dispatch(getOneDistro(data))
   } catch (err) {
     console.error(err)

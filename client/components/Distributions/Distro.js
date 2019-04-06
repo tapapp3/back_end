@@ -22,11 +22,13 @@ class Distros extends Component {
     }
     return (
       <div>
-        <ul>
+        <ul className="ul">
           {distributors.map((company, idx) => {
             return (
-              <li key={idx}>
-                <Link to={`/distro/${company.name}`}>{company.name}</Link>
+              <li key={idx} className="card li">
+                <Link to={`/distro/${company.name}`} style={{color: 'white'}}>
+                  {company.name}
+                </Link>
               </li>
             )
           })}

@@ -14,23 +14,54 @@ class BeerList extends Component {
     this.setState({loading: false})
   }
   render() {
+    const date = new Date()
+    const subtracted = date.getTime() - 1200000000
     const {singleDistro} = this.props || {}
-    const list = singleDistro.beerlists || []
     if (this.state.loading) {
       return <div />
     }
     return (
       <div>
-        <h1>{singleDistro.name}</h1>
-        <ul>
-          {list.map(beer => {
-            return (
-              <li key={beer.id}>
-                {beer.name} on tap {beer.tap}
-              </li>
-            )
+        <h2 style={{display: 'flex', justifyContent: 'center'}}>
+          {singleDistro.name}
+        </h2>
+        <form
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            paddingLeft: 0
+          }}
+        >
+          {singleDistro.map(beer => {
+            const num = Number(beer.cleaned)
+            if (num - subtracted < 0) {
+              return (
+                <div
+                  key={beer.id}
+                  className="card formList"
+                  style={{backgroundColor: '#FCE694', color: 'red'}}
+                >
+                  <span>
+                    {beer.OnTaps[0].tap}. {beer.name}{' '}
+                  </span>
+                </div>
+              )
+            } else {
+              return (
+                <div
+                  key={beer.id}
+                  className="card formList"
+                  style={{backgroundColor: '#0D5C63', color: 'white'}}
+                >
+                  <span>
+                    {beer.OnTaps[0].tap}. {beer.name}{' '}
+                  </span>
+                </div>
+              )
+            }
           })}
-        </ul>
+        </form>
       </div>
     )
   }
