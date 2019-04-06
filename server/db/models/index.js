@@ -1,6 +1,7 @@
 const User = require('./user')
 const Distros = require('./distros')
 const BeerList = require('./BeerList')
+const OnTaps = require('./onTap')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -11,8 +12,12 @@ const BeerList = require('./BeerList')
 
 Distros.hasMany(BeerList)
 BeerList.belongsTo(Distros)
-BeerList.belongsToMany(User, {through: 'onTap'})
-User.belongsToMany(BeerList, {through: 'onTap'})
+OnTaps.belongsTo(BeerList)
+OnTaps.belongsTo(User)
+BeerList.hasMany(OnTaps)
+User.hasMany(OnTaps)
+// BeerList.belongsToMany(User, {through: OnTaps})
+// User.belongsToMany(BeerList, {through: OnTaps})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -23,5 +28,6 @@ User.belongsToMany(BeerList, {through: 'onTap'})
 module.exports = {
   User,
   Distros,
-  BeerList
+  BeerList,
+  OnTaps
 }

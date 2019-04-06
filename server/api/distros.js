@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Distros, BeerList} = require('../db/models')
+const {Distros, BeerList, OnTaps} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -14,10 +14,15 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:name', async (req, res, next) => {
   try {
-    const distro = await Distros.findById(req.params.name, {
-      include: [{model: BeerList, attributes: ['id', 'name', 'tap', 'cleaned']}]
+    const distro = await Distros.findById(req.params.name)
+    const beer = await BeerList.findAll({
+      where: {
+        distributionName: distro.name
+      },
+      include: [{model: OnTaps, where: {userId: req.user.id}}]
     })
-    res.json(distro)
+
+    res.json(beer)
   } catch (err) {
     next(err)
   }

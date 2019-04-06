@@ -1,9 +1,18 @@
 body {
   font-family: sans-serif;
+  background-color: #78cdd7;
+  box-sizing: border-box;
 }
 
 a {
   text-decoration: none;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 0;
+  text-align: center;
 }
 
 label {
@@ -18,4 +27,32 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 0;
+}
+
+.li {
+  width: 18rem;
+  height: 5rem;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  border-radius: 3rem;
+  background-color: #0d5c63;
+  font-size: 1rem;
+}
+
+.formList {
+  width: 18rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+  border-radius: 30px;
+  font-size: 1rem;
 }

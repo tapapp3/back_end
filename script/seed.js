@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Distros, BeerList} = require('../server/db/models')
+const {User, Distros, BeerList, OnTaps} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -25,39 +25,112 @@ async function seed() {
   const distributors = await Promise.all([
     Distros.create({name: 'PacBev'}),
     Distros.create({name: 'CCD'}),
-    Distros.create({name: 'Thomas Weidner'})
+    Distros.create({name: 'Thomas Weidner'}),
+    Distros.create({name: 'Muhammed Ali'})
   ])
 
   const beers = await Promise.all([
     BeerList.create({
       name: 'Elysian Space Dust',
       distributionName: 'PacBev',
-      tap: 1,
-      cleaned: Date.now() - 1000
+      onTap: true,
+      cleaned: new Date()
     }),
     BeerList.create({
       name: 'Stone IPA',
       distributionName: 'CCD',
-      tap: 2,
-      cleaned: Date.now() - 100000
+      onTap: true,
+      cleaned: new Date()
     }),
     BeerList.create({
       name: 'Kern River Pumpkin Ale',
       distributionName: 'Thomas Weidner',
-      tap: 3,
-      cleaned: Date.now() - 50000
+      onTap: true,
+      cleaned: new Date()
     }),
     BeerList.create({
       name: 'Firestone Sucaba',
       distributionName: 'PacBev',
-      tap: 4,
-      cleaned: Date.now() - 60000
+      onTap: true,
+      cleaned: new Date()
     }),
     BeerList.create({
       name: '32 North Considerate Gentleman',
       distributionName: 'Thomas Weidner',
+      onTap: true,
+      cleaned: new Date()
+    }),
+    BeerList.create({
+      name: '31 North Considerate Gentleman',
+      distributionName: 'Thomas Weidner',
+      onTap: true,
+      cleaned: new Date()
+    }),
+    BeerList.create({
+      name: 'Corona',
+      distributionName: 'Thomas Weidner',
+      cleaned: new Date()
+    }),
+    BeerList.create({
+      name: 'Budweiser',
+      distributionName: 'Thomas Weidner',
+      cleaned: new Date()
+    })
+  ])
+
+  const onTap = await Promise.all([
+    OnTaps.create({
+      tap: 1,
+      userId: 1,
+      beerlistId: 1
+    }),
+    OnTaps.create({
+      tap: 2,
+      userId: 1,
+      beerlistId: 2
+    }),
+    OnTaps.create({
+      tap: 3,
+      userId: 1,
+      beerlistId: 3
+    }),
+    OnTaps.create({
+      tap: 4,
+      userId: 1,
+      beerlistId: 4
+    }),
+    OnTaps.create({
       tap: 5,
-      cleaned: Date.now() - 70000
+      userId: 1,
+      beerlistId: 5
+    }),
+    OnTaps.create({
+      tap: 6,
+      userId: 1,
+      beerlistId: 6
+    }),
+    OnTaps.create({
+      userId: 1,
+      beerlistId: 7
+    }),
+    OnTaps.create({
+      userId: 1,
+      beerlistId: 8
+    }),
+    OnTaps.create({
+      tap: 1,
+      userId: 2,
+      beerlistId: 1
+    }),
+    OnTaps.create({
+      tap: 2,
+      userId: 2,
+      beerlistId: 2
+    }),
+    OnTaps.create({
+      tap: 3,
+      userId: 2,
+      beerlistId: 6
     })
   ])
 

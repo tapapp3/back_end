@@ -6,14 +6,17 @@ const BeerList = db.define('beerlist', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  tap: {
-    type: Sequelize.INTEGER,
-    unique: true,
-    allowNull: false
-  },
   cleaned: {
-    type: Sequelize.DATE
+    type: Sequelize.BIGINT
+  },
+  onTap: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
+})
+
+BeerList.beforeCreate(list => {
+  list.cleaned = list.cleaned.getTime() - 1200000000
 })
 
 module.exports = BeerList
